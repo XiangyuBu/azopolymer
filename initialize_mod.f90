@@ -101,7 +101,7 @@ deltaS = 1.0d0*Loa/Nm
 r_sphere = roL*Nm                                   
 r_sphere_2 = r_sphere*r_sphere
 
-Lr = Nm*(roL+1)
+Lr = Nm*(roL+2.75)
 !Lz = Nm*(roL+1+csoL)  
 Lz = Nm*(roL+8.25+csoL) 
 
@@ -480,27 +480,27 @@ do i=1,length
 end do
 !print*, 1.0d0 * j/length,"rotate move"
 
-!open(unit=50,file='azo_ini.txt')
-!open(unit=51,file='sub_ini.txt')
-!open(unit=52,file='pol_ini.txt')
-!do j=1,n_azo
-!    do i=0,nm
-!        write(50,*) azo(j,i)%x, azo(j,i)%y, azo(j,i)%z
-!    end do
-!end do
-!do j=1,n_sub
-!    do i=0,nm_sub
-!        write(51,*) sub(j,i)%x, sub(j,i)%y, sub(j,i)%z
-!    end do
-!end do
-!do j=1,n_chain
-!    do i=0,nm_pol
-!        write(52,*) polymer(j,i)%x, polymer(j,i)%y, polymer(j,i)%z
-!    end do
-!end do
-!close(50)
-!close(51)
-!close(52)
+open(unit=50,file='azo_ini.txt')
+open(unit=51,file='sub_ini.txt')
+open(unit=52,file='pol_ini.txt')
+do j=1,n_azo
+    do i=0,nm
+        write(50,*) azo(j,i)%x, azo(j,i)%y, azo(j,i)%z
+    end do
+end do
+do j=1,n_sub
+    do i=0,nm_sub
+        write(51,*) sub(j,i)%x, sub(j,i)%y, sub(j,i)%z
+    end do
+end do
+do j=1,n_chain
+    do i=0,nm_pol
+        write(52,*) polymer(j,i)%x, polymer(j,i)%y, polymer(j,i)%z
+    end do
+end do
+close(50)
+close(51)
+close(52)
 
  
 call checkpolymer (flag_c)
@@ -510,5 +510,5 @@ Deallocate(bond_vector)
 !call comformation_write()
 !write(*,*) "CREATED OK"
 
-!stop"ini is ok"
+stop"ini is ok"
 end subroutine initialize          
