@@ -89,11 +89,11 @@ do n_iter = 1, Max_iter
                 N_pre = 1 + N_pre         
             end if
         end do  
-        write(15,*) i_move, 1.0d0 * i_move/n_move,"sphere move"
-        write(15,*) i_rotate, 1.0d0 * i_rotate/n_rotate,"rotate move"
-        write(15,*) i_pivot, 1.0d0 * i_pivot/n_pivot,"pivot move"    
-        write(15,*) i_small, 1.0d0 * i_small/n_small,"azo move"
-        write(15,*) i_substrate, 1.0d0 * i_substrate/n_substrate,"sub move" 
+!        write(15,*) i_move, 1.0d0 * i_move/n_move,"sphere move"
+!        write(15,*) i_rotate, 1.0d0 * i_rotate/n_rotate,"rotate move"
+!        write(15,*) i_pivot, 1.0d0 * i_pivot/n_pivot,"pivot move"    
+!        write(15,*) i_small, 1.0d0 * i_small/n_small,"azo move"
+!        write(15,*) i_substrate, 1.0d0 * i_substrate/n_substrate,"sub move" 
 !! find out w_new
     
     MCS = 0
@@ -207,6 +207,13 @@ end if
     errodown = -1.0d0
     erro(n_iter) = w_erro
     if (w_erro<TOL .and. n_iter>3) then
+        open(unit=61,file='w.ome')
+        do j = 1, Nz
+            do i = 1, Nr
+                    write(61,*)  w(i,j), eta(i,j), eta_azo(i,j)
+              end do
+        end do
+        close(61)
         exit
     end if
     
