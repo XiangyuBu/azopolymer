@@ -20,7 +20,7 @@ DOUBLE PRECISION, PARAMETER :: TOL = 1.0D-5
 DOUBLE PRECISION :: r_radius,r_radius_1, zz, rr, temp, x_r, y_r
 
 
-type(node) :: graft_point(0:401)  
+type(node) :: graft_point(0:999)  
 character*7 res,resres,res_s
 character res0,res1,res2
 logical alive,check
@@ -101,7 +101,7 @@ deltaS = 1.0d0*Loa/Nm
 r_sphere = roL*Nm                                   
 r_sphere_2 = r_sphere*r_sphere
 
-Lr = Nm*(roL+2.75)
+Lr = Nm*(roL+1.75)
 !Lz = Nm*(roL+1+csoL)  
 Lz = Nm*(roL+8.25+csoL) 
 
@@ -136,14 +136,14 @@ eta = 0
 eta_azo = 0
 eta_sub = 0
 
-inquire(file='wfield.txt',exist=alive) 
+inquire(file='w.ome',exist=alive) 
 if(alive) then                          
-    open(unit=42,file='wfield.txt',status='old')
+    open(unit=42,file='w.ome',status='old')
     read(42,*)
     print*, "read omega"
     do j=1,Nz
         do i=1,Nr
-            read(42,*) w(i,j), eta(i,j)
+            read(42,*) w(i,j), eta(i,j), eta_azo(i,j)
         enddo
     enddo
     close(42)

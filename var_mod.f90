@@ -44,7 +44,7 @@ open(unit=86,file='rhorho.txt')
 open(unit=87,file='sub_end.txt')
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!open(unit=100,file='033.ome')
+!open(unit=100,file='w.ome')
 
     call SCMFT()
 
@@ -79,7 +79,7 @@ rho = 0
         i_pivot = 0
         i_small = 0
         i_substrate = 0
-       
+      
         do while(N_pre < Npre)              
             r = ran2(seed)
             if ( r>trial_move_rate(1) ) then
@@ -133,10 +133,9 @@ rho = 0
 !!!!!!!!!!!!!!!!!!!!!!!!!!end pre-move!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 print*, "var is beginning"
-do while(MCS < 5*NMCs)
-               
+do while(MCS < 5*NMCs)          
     MCS = MCS + 1
-  
+    
     moves = 0
         do while(moves < Nmove)              
         

@@ -204,6 +204,17 @@ end if
 
 
 !stop "first scft"
+
+    if ( mod(n_iter,5) == 0 ) then
+        open(unit=61,file='w_temp.ome')
+        do j = 1, Nz
+            do i = 1, Nr
+                write(61,*) n_iter, w(i,j)
+            end do
+        end do
+        close(61)
+    end if
+    
     errodown = -1.0d0
     erro(n_iter) = w_erro
     if (w_erro<TOL .and. n_iter>3) then
