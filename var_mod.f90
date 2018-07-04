@@ -22,6 +22,8 @@ DOUBLE PRECISION, DIMENSION(:,:), ALLOCATABLE :: density_end_1_temp, density_end
 
 character*7 res,resres,res_s,res_o,res_e,res_p,res_a
 character res0,res1,res2
+logical alive,check
+
 allocate( pp(1:Nz),ppp(1:Nz),pppp(1:Nz),ppppp(1:Nz),psi(1:Nz),rho(1:Nz),subend(1:Nz) )
 allocate( pp_temp(1:Nz),ppp_temp(1:Nz),pppp_temp(1:Nz),ppppp_temp(1:Nz),subend_temp(1:Nz) )
 allocate( density_end_1(1:Nr+1,1:Nz),density_end_2(1:Nr+1,1:Nz),density_end_3(1:Nr+1,1:Nz) )
@@ -46,7 +48,7 @@ open(unit=87,file='sub_end.txt')
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !open(unit=100,file='w.ome')
 
-    call SCMFT()
+!    call SCMFT()
 
 !do j = 1, Nz
 !    do i = 1, Nr
@@ -54,6 +56,22 @@ open(unit=87,file='sub_end.txt')
 !	end do
 !end do
 !close(100)
+
+inquire(file='w.ome',exist=alive) 
+if(alive) then                          
+    open(unit=42,file='w.ome',status='old')
+    print*, "var is beginning"
+    do j=1,Nz
+        do i=1,Nr
+            read(42,*) w(i,j), eta(i,j), eta_azo(i,j)
+        end do
+    end do
+    close(42)
+else
+    print*, "SCMFT is beginning" 
+    call SCMFT()
+end if
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
 MCS = 0
 density = 0
@@ -132,7 +150,6 @@ rho = 0
         end do  
 !!!!!!!!!!!!!!!!!!!!!!!!!!end pre-move!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-print*, "var is beginning"
 do while(MCS < 5*NMCs)          
     MCS = MCS + 1
     

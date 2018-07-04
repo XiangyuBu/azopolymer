@@ -136,18 +136,17 @@ eta = 0
 eta_azo = 0
 eta_sub = 0
 
-inquire(file='w.ome',exist=alive) 
-if(alive) then                          
-    open(unit=42,file='w.ome',status='old')
-    read(42,*)
-    print*, "read omega"
-    do j=1,Nz
-        do i=1,Nr
-            read(42,*) w(i,j), eta(i,j), eta_azo(i,j)
-        enddo
-    enddo
-    close(42)
-endif
+!inquire(file='w.ome',exist=alive) 
+!if(alive) then                          
+!    open(unit=42,file='w.ome',status='old')
+!    print*, "read omega"
+!    do j=1,Nz
+!        do i=1,Nr
+!            read(42,*) w(i,j), eta(i,j), eta_azo(i,j)
+!        enddo
+!    enddo
+!    close(42)
+!endif
 
 !!!! initialize the chains on the substrate!!!!!!have some questions!!!!!!!!!
 p_sphere_2 = csoL * Nm 
